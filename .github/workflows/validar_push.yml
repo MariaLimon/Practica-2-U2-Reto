@@ -1,1 +1,21 @@
+name: Push Branch Validator
+on: 
+push: 
+branches-ignore: 
+  - main
+  - master
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+      - name: Check Branch Prefix
+        run: 
+          if [[ "${{ github.ref_name }}" =~ ^(feature|bugfix|hotfix)/[a-zA-Z0-9._-]+$ ]]; then
+            echo "Nombre de rama válido."
+          else
+            echo "Nombre de rama inválido. Debe comenzar con feature/, fix/, hotfix/ o release/."
+            exit 1
+          fi
