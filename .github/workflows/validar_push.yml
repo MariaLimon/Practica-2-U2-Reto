@@ -19,3 +19,4 @@ jobs:
             echo "Nombre de rama inválido. Debe comenzar con feature/, fix/, hotfix/ o release/."
             exit 1
           fi
+
